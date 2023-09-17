@@ -13,7 +13,7 @@ function Login() {
           required
         />
         <input
-          type="text"
+          type="password"
           className="login__input login__input_type_password"
           name="password"
           placeholder="Пароль"

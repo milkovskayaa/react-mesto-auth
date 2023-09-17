@@ -12,3 +12,8 @@
   background-color: #fff;
   margin: 216px 0 0 0;
 }
+
+.login__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}

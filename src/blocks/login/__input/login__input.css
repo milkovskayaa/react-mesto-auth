@@ -6,12 +6,12 @@
   font-weight: 400;
   color: #ccc;
   line-height: 1.2;
-  margin-top: 50px;
   border: none;
   border-bottom: 2px solid #ccc;
   padding: 0 0 10px 0;
+  background-color: #000;
 }
 
-.login__input:nth-child(3) {
+.login__input:nth-child(2) {
   margin-top: 30px;
 }
