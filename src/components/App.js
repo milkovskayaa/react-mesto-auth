@@ -9,7 +9,7 @@ import AddPlacePopup from "./AddPlacePopup.js";
 import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
@@ -141,13 +141,13 @@ function App() {
 
   return (
     <div className="root">
-      <Routes>
-        <Route path="/sign-up" />
-        <Route path="/sign-in" />
-      </Routes>
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
           <Header />
+          <Routes>
+            <Route path="/sign-up" />
+            <Route path="/sign-in" />
+          </Routes>
           <Main
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
