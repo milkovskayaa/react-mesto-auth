@@ -17,7 +17,7 @@ function Login() {
           name="password"
           placeholder="Пароль"
         />
-        <button type="submit" className="login__button"></button>
+        <button type="submit" className="login__button">Войти</button>
       </form>
     </section>
   );
