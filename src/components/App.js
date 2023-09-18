@@ -11,6 +11,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 import { BrowserRouter, Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import Login from "./Login.js";
+import Register from "./Register.js";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
@@ -147,7 +148,7 @@ function App() {
           <Header />
           <BrowserRouter>
             <Routes>
-              <Route path="/sign-up" />
+              <Route path="/sign-up" element={<Register/>} />
               <Route path="/sign-in" element={<Login />} />
             </Routes>
           </BrowserRouter>
