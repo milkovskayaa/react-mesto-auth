@@ -1,29 +1,28 @@
 import React from "react";
+import { Link, useNavigate } from 'react-router-dom';
 
 function Register() {
   return(
-    <section className="register">
-      <h2 className="register__title">Вход</h2>
-      <form className="register__form">
+    <section className="login">
+      <h2 className="login__title">Регистрация</h2>
+      <form className="login__form">
         <input
           type="text"
-          className="register__input register__input_type_email"
+          className="login__input login__input_type_email"
           name="email"
           placeholder="Email"
           required
         />
         <input
           type="password"
-          className="register__input register__input_type_password"
+          className="login__input login__input_type_password"
           name="password"
           placeholder="Пароль"
           required
         />
-        <button type="submit" className="register__button">Зарегистрироваться</button>
-        <p className="register__link-to-login">
-          <a href="#" className="link" /> Уже зарегистрированы? Войти
-        </p>
+        <button type="submit" className="login__button">Зарегистрироваться</button>
       </form>
+      <span className="login__subtitle">Уже зарегистрированы? <Link to="/sign-in" className='login__link'>Войти</Link></span>
     </section>
   )
 }
