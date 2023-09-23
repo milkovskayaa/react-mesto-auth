@@ -23,7 +23,7 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     Auth.register(formValue.email, formValue.password)
-    .then((res) => {
+    .then(() => {
       navigate('/sign-in', {replace: true})
     })
   }

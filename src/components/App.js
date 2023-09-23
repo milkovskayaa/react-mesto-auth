@@ -157,7 +157,7 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
           <BrowserRouter>
-          <Header loggedIn={loggedIn} />
+            <Header loggedIn={loggedIn} />
             <Routes>
               <Route
                 path="/"
@@ -188,8 +188,8 @@ function App() {
                 }
               />
             </Routes>
+            <Footer />
           </BrowserRouter>
-          <Footer />
         </div>
         <ImagePopup
           onClose={closeAllPopups}
