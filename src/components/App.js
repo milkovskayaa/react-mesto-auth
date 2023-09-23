@@ -19,6 +19,8 @@ import {
 import Login from "./Login.js";
 import Register from "./Register.js";
 import ProtectedRoute from "./ProtectedRoute.js";
+import successRegisterIcon from "../images/successRegister.png"
+import failRegisterIcon from "../images/failRegister.png"
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
