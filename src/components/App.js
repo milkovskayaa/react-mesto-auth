@@ -12,6 +12,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import { BrowserRouter, Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import Login from "./Login.js";
 import Register from "./Register.js";
+import ProtectedRoute from "./ProtectedRoute.js";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
