@@ -2,3 +2,8 @@
   text-decoration: none;
   color: #fff;
 }
+
+.login__link:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}

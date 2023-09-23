@@ -156,8 +156,8 @@ function App() {
     <div className="root">
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
-          <Header />
           <BrowserRouter>
+          <Header loggedIn={loggedIn} />
             <Routes>
               <Route
                 path="/"
