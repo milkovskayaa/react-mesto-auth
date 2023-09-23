@@ -9,7 +9,13 @@ import AddPlacePopup from "./AddPlacePopup.js";
 import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-import { BrowserRouter, Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import Login from "./Login.js";
 import Register from "./Register.js";
 import ProtectedRoute from "./ProtectedRoute.js";
@@ -23,6 +29,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   // получение карточек с сервера
   React.useEffect(() => {
@@ -149,19 +156,36 @@ function App() {
           <Header />
           <BrowserRouter>
             <Routes>
-              <Route path="/sign-up" element={<Register/>} />
+              <Route
+                path="/"
+                element={
+                  loggedIn ? (
+                    <Navigate to="my-profile" replace />
+                  ) : (
+                    <Navigate to="/sign-in" replace />
+                  )
+                }
+              />
+              <Route path="/sign-up" element={<Register />} />
               <Route path="/sign-in" element={<Login />} />
+              <Route
+                path="my-profile"
+                element={
+                  <ProtectedRoute
+                    element={Main}
+                    loggedIn={loggedIn}
+                    onEditProfile={handleEditProfileClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onEditAvatar={handleEditAvatarClick}
+                    onCardClick={handleCardClick}
+                    onCardLike={handleCardLike}
+                    cards={cards}
+                    onCardDelete={handleCardDelete}
+                  />
+                }
+              />
             </Routes>
           </BrowserRouter>
-          <Main
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick}
-            onCardLike={handleCardLike}
-            cards={cards}
-            onCardDelete={handleCardDelete}
-          />
           <Footer />
         </div>
         <ImagePopup
