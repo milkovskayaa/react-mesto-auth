@@ -30,6 +30,10 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
+  const [isRegisterPopupOpen, setRegisterPopupOpen] = React.useState(false);
+  const [registerIconStatus, setRegisterIconStatus] =
+    React.useState(successRegisterIcon);
+  const [registerTextStatus, setRegisterTextStatus] = React.useState("");
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
@@ -166,12 +170,25 @@ function App() {
     setEditAvatarPopupOpen(true);
   }
 
+  // функция изменения попапа регистрации
+  function handleRegistration(iconStatus) {
+    if (iconStatus === "success") {
+      setRegisterIconStatus(successRegisterIcon);
+      setRegisterTextStatus("Вы успешно зарегистрировались!");
+    } else {
+      setRegisterIconStatus(failRegisterIcon);
+      setRegisterTextStatus("Что-то пошло не так! Попробуйте ещё раз.");
+    }
+    setRegisterPopupOpen(true);
+  }
+
   // закрытие всех попапов
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
     setImagePopupOpen(false);
+    setRegisterPopupOpen(false);
     setSelectedCard({});
   }
 
@@ -196,7 +213,10 @@ function App() {
                   )
                 }
               />
-              <Route path="/sign-up" element={<Register />} />
+              <Route
+                path="/sign-up"
+                element={<Register handleRegistration={handleRegistration} />}
+              />
               <Route
                 path="/sign-in"
                 element={<Login handleLogin={handleLogin} />}
@@ -207,6 +227,7 @@ function App() {
                   <ProtectedRoute
                     element={Main}
                     loggedIn={loggedIn}
+                    userData={userData}
                     onEditProfile={handleEditProfileClick}
                     onAddPlace={handleAddPlaceClick}
                     onEditAvatar={handleEditAvatarClick}
@@ -221,6 +242,12 @@ function App() {
             <Footer />
           </BrowserRouter>
         </div>
+        <InfoTooltip
+          isOpen={isRegisterPopupOpen}
+          onClose={closeAllPopups}
+          statusImage={registerIconStatus}
+          statusText={registerTextStatus}
+        />
         <ImagePopup
           onClose={closeAllPopups}
           isOpen={isImagePopupOpen}

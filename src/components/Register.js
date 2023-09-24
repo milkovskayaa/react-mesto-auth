@@ -1,32 +1,36 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import * as Auth from '../utils/Auth.js';
+import * as Auth from "../utils/Auth.js";
 
-function Register() {
-
+function Register({ handleRegistration }) {
   const [formValue, setFormValue] = React.useState({
-    email: '',
-    password: ''
-  })
+    email: "",
+    password: "",
+  });
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
 
     setFormValue({
       ...formValue,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     Auth.register(formValue.email, formValue.password)
-    .then(() => {
-      navigate('/sign-in', {replace: true})
-    })
-  }
+      .then(() => {
+        handleRegistration("success");
+        navigate("/sign-in", { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+        handleRegistration("fail");
+      });
+  };
 
   return (
     <section className="login">
