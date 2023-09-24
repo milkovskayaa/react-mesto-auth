@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
@@ -22,6 +22,7 @@ import ProtectedRoute from "./ProtectedRoute.js";
 import successRegisterIcon from "../images/successRegister.png";
 import failRegisterIcon from "../images/failRegister.png";
 import InfoTooltip from "./InfoTooltip.js";
+import * as Auth from "../utils/Auth.js";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
@@ -33,7 +34,28 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [userData, setUserData] = React.useState({});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    tokenCheck();
+  }, []);
+
+  // функция проверки токена пользователя
+  const tokenCheck = () => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      Auth.getContent(jwt).then((res) => {
+        if (res) {
+          setUserData({
+            email: res.email,
+          });
+          setLoggedIn(true);
+          navigate("/my-profile", { replace: true });
+        }
+      });
+    }
+  };
 
   // получение карточек с сервера
   React.useEffect(() => {
@@ -155,7 +177,7 @@ function App() {
 
   const handleLogin = () => {
     setLoggedIn(true);
-  }
+  };
 
   return (
     <div className="root">
@@ -175,7 +197,10 @@ function App() {
                 }
               />
               <Route path="/sign-up" element={<Register />} />
-              <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
+              <Route
+                path="/sign-in"
+                element={<Login handleLogin={handleLogin} />}
+              />
               <Route
                 path="my-profile"
                 element={
