@@ -21,7 +21,7 @@ function Header({ loggedIn }) {
         )}
         {location.pathname === "/sign-in" ? (
           <li>
-            <Link to="sign-in" className="header__link">
+            <Link to="sign-up" className="header__link">
               Регистрация
             </Link>
           </li>

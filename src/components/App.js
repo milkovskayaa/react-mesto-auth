@@ -200,7 +200,6 @@ function App() {
     <div className="root">
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
-          <BrowserRouter>
             <Header loggedIn={loggedIn} />
             <Routes>
               <Route
@@ -240,7 +239,6 @@ function App() {
               />
             </Routes>
             <Footer />
-          </BrowserRouter>
         </div>
         <InfoTooltip
           isOpen={isRegisterPopupOpen}
