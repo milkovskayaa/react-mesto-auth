@@ -43,16 +43,16 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-  }, []);
+  }, [loggedIn]);
 
   // функция проверки токена пользователя
   const tokenCheck = () => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      Auth.getContent(jwt).then((res) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      Auth.getContent(token).then((res) => {
         if (res) {
           setUserData({
-            email: res.email,
+            email: res.data.email,
           });
           setLoggedIn(true);
           navigate("/my-profile", { replace: true });
@@ -200,7 +200,7 @@ function App() {
     <div className="root">
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
-            <Header loggedIn={loggedIn} />
+            <Header loggedIn={loggedIn} userData={userData} />
             <Routes>
               <Route
                 path="/"

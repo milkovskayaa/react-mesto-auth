@@ -2,14 +2,14 @@ import React from "react";
 import headerLogo from "../images/logo.svg";
 import { Link, useLocation } from "react-router-dom";
 
-function Header({ loggedIn }) {
+function Header({ loggedIn, userData }) {
   const location = useLocation();
 
   return (
     <header className="header">
       <img src={headerLogo} alt="Логотип" className="header__logo" />
       <ul className="header__navigation">
-        {/* {loggedIn ? <li className="header__link"></li> : ''} */}
+       {loggedIn ? <li className="header__link header__userinfo">{userData.email}</li> : ''}
         {location.pathname === "/sign-up" ? (
           <li>
             <Link to="sign-in" className="header__link">
