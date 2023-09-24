@@ -9,13 +9,7 @@ import AddPlacePopup from "./AddPlacePopup.js";
 import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import Login from "./Login.js";
 import Register from "./Register.js";
 import ProtectedRoute from "./ProtectedRoute.js";
@@ -41,7 +35,7 @@ function App() {
   const [userData, setUserData] = React.useState({});
   const navigate = useNavigate();
 
-  useEffect(() => {
+  React.useEffect(() => {
     tokenCheck();
   }, [loggedIn]);
 
@@ -59,6 +53,13 @@ function App() {
         }
       });
     }
+  };
+
+  // функция выхода из системы
+  const signOut = () => {
+    localStorage.removeItem("token");
+    setUserData('');
+    navigate("/sign-in", { replace: true });
   };
 
   // получение карточек с сервера
@@ -200,45 +201,45 @@ function App() {
     <div className="root">
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
-            <Header loggedIn={loggedIn} userData={userData} />
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  loggedIn ? (
-                    <Navigate to="my-profile" replace />
-                  ) : (
-                    <Navigate to="/sign-in" replace />
-                  )
-                }
-              />
-              <Route
-                path="/sign-up"
-                element={<Register handleRegistration={handleRegistration} />}
-              />
-              <Route
-                path="/sign-in"
-                element={<Login handleLogin={handleLogin} />}
-              />
-              <Route
-                path="my-profile"
-                element={
-                  <ProtectedRoute
-                    element={Main}
-                    loggedIn={loggedIn}
-                    userData={userData}
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onEditAvatar={handleEditAvatarClick}
-                    onCardClick={handleCardClick}
-                    onCardLike={handleCardLike}
-                    cards={cards}
-                    onCardDelete={handleCardDelete}
-                  />
-                }
-              />
-            </Routes>
-            <Footer />
+          <Header loggedIn={loggedIn} userData={userData} signOut={signOut} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                loggedIn ? (
+                  <Navigate to="my-profile" replace />
+                ) : (
+                  <Navigate to="/sign-in" replace />
+                )
+              }
+            />
+            <Route
+              path="/sign-up"
+              element={<Register handleRegistration={handleRegistration} />}
+            />
+            <Route
+              path="/sign-in"
+              element={<Login handleLogin={handleLogin} />}
+            />
+            <Route
+              path="my-profile"
+              element={
+                <ProtectedRoute
+                  element={Main}
+                  loggedIn={loggedIn}
+                  userData={userData}
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleAddPlaceClick}
+                  onEditAvatar={handleEditAvatarClick}
+                  onCardClick={handleCardClick}
+                  onCardLike={handleCardLike}
+                  cards={cards}
+                  onCardDelete={handleCardDelete}
+                />
+              }
+            />
+          </Routes>
+          <Footer />
         </div>
         <InfoTooltip
           isOpen={isRegisterPopupOpen}
