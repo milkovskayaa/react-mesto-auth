@@ -1,11 +1,44 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import * as Auth from "../utils/Auth.js";
 
-function Login() {
+function Login({ handleLogin }) {
+  const [formValue, setFormValue] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formValue.email || !formValue.password) {
+      return;
+    }
+    Auth.authorize(formValue.email, formValue.password).then((data) => {
+      if (data.jwt) {
+        setFormValue({ email: "", password: "" });
+        handleLogin();
+        navigate("/sign-in", { replace: true });
+      }
+    });
+  };
+
   return (
     <section className="login">
       <h2 className="login__title">Вход</h2>
-      <form className="login__form">
+      <form className="login__form" onSubmit={handleSubmit}>
         <input
+          onChange={handleChange}
           type="text"
           className="login__input login__input_type_email"
           name="email"
@@ -13,13 +46,16 @@ function Login() {
           required
         />
         <input
+          onChange={handleChange}
           type="password"
           className="login__input login__input_type_password"
           name="password"
           placeholder="Пароль"
           required
         />
-        <button type="submit" className="login__button">Войти</button>
+        <button type="submit" className="login__button">
+          Войти
+        </button>
       </form>
     </section>
   );

@@ -32,7 +32,7 @@ export const authorize = (identifier, password) => {
   .then((response => response.json()))
   .then((data) => {
     if (data.user){
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('jwt', data.jwt);
       return data;
     }
   })
