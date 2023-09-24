@@ -33,6 +33,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const navigate = useNavigate();
 
   // получение карточек с сервера
   React.useEffect(() => {

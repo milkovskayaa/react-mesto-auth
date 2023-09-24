@@ -40,7 +40,7 @@ export const authorize = (identifier, password) => {
 }
 
 // запрос для проверки валидности токена
-export const getToken = (token) => {
+export const getContent = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
