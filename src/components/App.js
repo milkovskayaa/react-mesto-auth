@@ -152,6 +152,10 @@ function App() {
     setSelectedCard({});
   }
 
+  const handleLogin = () => {
+    setLoggedIn(true);
+  }
+
   return (
     <div className="root">
       <CurrentUserContext.Provider value={currentUser}>
@@ -170,7 +174,7 @@ function App() {
                 }
               />
               <Route path="/sign-up" element={<Register />} />
-              <Route path="/sign-in" element={<Login />} />
+              <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
               <Route
                 path="my-profile"
                 element={

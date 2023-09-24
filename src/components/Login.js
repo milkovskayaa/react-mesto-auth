@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as Auth from "../utils/Auth.js";
 
 function Login({ handleLogin }) {
@@ -28,7 +28,7 @@ function Login({ handleLogin }) {
       if (data.jwt) {
         setFormValue({ email: "", password: "" });
         handleLogin();
-        navigate("/sign-in", { replace: true });
+        navigate("/my-profile", { replace: true });
       }
     });
   };
@@ -38,6 +38,7 @@ function Login({ handleLogin }) {
       <h2 className="login__title">Вход</h2>
       <form className="login__form" onSubmit={handleSubmit}>
         <input
+          value={formValue.email}
           onChange={handleChange}
           type="text"
           className="login__input login__input_type_email"
@@ -46,6 +47,7 @@ function Login({ handleLogin }) {
           required
         />
         <input
+          value={formValue.password}
           onChange={handleChange}
           type="password"
           className="login__input login__input_type_password"
