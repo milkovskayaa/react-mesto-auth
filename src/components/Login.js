@@ -24,8 +24,10 @@ function Login({ handleLogin }) {
     if (!formValue.email || !formValue.password) {
       return;
     }
-    Auth.authorize(formValue.email, formValue.password).then((data) => {
-      if (data.jwt) {
+    Auth.authorize(formValue.email, formValue.password)
+    .then((data) => {
+      console.log(data)
+      if (data.token) {
         setFormValue({ email: "", password: "" });
         handleLogin();
         navigate("/my-profile", { replace: true });

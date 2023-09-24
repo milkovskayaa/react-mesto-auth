@@ -1,4 +1,4 @@
-export const BASE_URL = "https://auth.nomoreparties.co/";
+export const BASE_URL = "https://auth.nomoreparties.co";
 
 // запрос для регистрации
 export const register = (email, password) => {
@@ -21,19 +21,18 @@ export const register = (email, password) => {
 }
 
 // запрос для авторизации
-export const authorize = (identifier, password) => {
+export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({identifier, password})
+    body: JSON.stringify({email, password})
   })
   .then((response => response.json()))
   .then((data) => {
-    console.log(data)
-    if (data.user){
-      localStorage.setItem('jwt', data.jwt);
+    if (data.token){
+      localStorage.setItem('token', data.token);
       return data;
     }
   })
