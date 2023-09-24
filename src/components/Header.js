@@ -10,6 +10,7 @@ function Header({ loggedIn, userData }) {
       <img src={headerLogo} alt="Логотип" className="header__logo" />
       <ul className="header__navigation">
        {loggedIn ? <li className="header__link header__userinfo">{userData.email}</li> : ''}
+       {location.pathname === "/my-profile" ? <li><button className="header__link header__button">Выйти</button></li> : ""}
         {location.pathname === "/sign-up" ? (
           <li>
             <Link to="sign-in" className="header__link">
