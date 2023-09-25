@@ -4,6 +4,8 @@
 ## Автор:
 [Мальцева Татьяна](https://github.com/milkovskayaa)
 ## Технологии, использующиеся в проекте:
+* Регистрация пользователя в системе.
+* Авторизация пользователя.
 * Адаптивная верстка.
 * Grid Layout.
 * Flexbox.
@@ -13,4 +15,4 @@
 * Декларативный подход.
 
 ## Ссылка на GitHub Pages:
-https://milkovskayaa.github.io/mesto-react/
+https://milkovskayaa.github.io/react-mesto-auth/
