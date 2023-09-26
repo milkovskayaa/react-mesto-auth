@@ -52,4 +52,3 @@ export const getContent = (token) => {
   .then(data => data)
 
 }
-  

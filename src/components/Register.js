@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import * as Auth from "../utils/Auth.js";
+import * as auth from '../utils/auth.js';
 
 function Register({ handleRegistration }) {
   const [formValue, setFormValue] = React.useState({
