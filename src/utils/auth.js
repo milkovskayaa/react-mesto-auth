@@ -1,3 +1,5 @@
+import checkResponse from './checkResponse.js';
+
 export const BASE_URL = "https://auth.nomoreparties.co";
 
 // запрос для регистрации
@@ -9,15 +11,7 @@ export const register = (email, password) => {
     },
     body: JSON.stringify({email, password})
   })
-  .then((response) => {
-    return response.json();
-  })
-  .then((res) => {
-    return res;
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+  .then(checkResponse);
 }
 
 // запрос для авторизации
@@ -29,14 +23,13 @@ export const authorize = (email, password) => {
     },
     body: JSON.stringify({email, password})
   })
-  .then((response => response.json()))
+  .then(checkResponse)
   .then((data) => {
     if (data.token){
       localStorage.setItem('token', data.token);
       return data;
     }
   })
-  .catch(err => console.log(err))
 }
 
 // запрос для проверки валидности токена
@@ -48,7 +41,7 @@ export const getContent = (token) => {
       'Authorization': `Bearer ${token}`
         }
   })
-  .then(res => res.json())
+  .then(checkResponse)
   .then(data => data)
 
 }
