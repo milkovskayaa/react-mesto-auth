@@ -24,7 +24,7 @@ function Login({ handleLogin }) {
     if (!formValue.email || !formValue.password) {
       return;
     }
-    Auth.authorize(formValue.email, formValue.password)
+    auth.authorize(formValue.email, formValue.password)
     .then((data) => {
       if (data.token) {
         setFormValue({ email: "", password: "" });

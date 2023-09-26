@@ -21,7 +21,7 @@ function Register({ handleRegistration }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Auth.register(formValue.email, formValue.password)
+    auth.register(formValue.email, formValue.password)
       .then(() => {
         handleRegistration("success");
         navigate("/sign-in", { replace: true });

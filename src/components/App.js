@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
@@ -44,7 +44,7 @@ function App() {
   const tokenCheck = () => {
     const token = localStorage.getItem("token");
     if (token) {
-      Auth.getContent(token).then((res) => {
+      auth.getContent(token).then((res) => {
         if (res) {
           setUserData({
             email: res.data.email,
