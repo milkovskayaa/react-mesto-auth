@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import * as auth from '../utils/auth.js';
+import * as auth from "../utils/auth.js";
 
 function Login({ handleLogin }) {
   const [formValue, setFormValue] = React.useState({
@@ -24,14 +24,16 @@ function Login({ handleLogin }) {
     if (!formValue.email || !formValue.password) {
       return;
     }
-    auth.authorize(formValue.email, formValue.password)
-    .then((data) => {
-      if (data.token) {
-        setFormValue({ email: "", password: "" });
-        handleLogin();
-        navigate("/my-profile", { replace: true });
-      }
-    });
+    auth
+      .authorize(formValue.email, formValue.password)
+      .then((data) => {
+        if (data.token) {
+          setFormValue({ email: "", password: "" });
+          handleLogin();
+          navigate("/my-profile", { replace: true });
+        }
+      })
+      .catch(console.error);
   };
 
   return (

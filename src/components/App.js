@@ -7,7 +7,7 @@ import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
 import AddPlacePopup from "./AddPlacePopup.js";
 import api from "../utils/api.js";
-import * as auth from '../utils/auth.js';
+import * as auth from "../utils/auth.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
@@ -17,7 +17,6 @@ import ProtectedRoute from "./ProtectedRoute.js";
 import successRegisterIcon from "../images/successRegister.png";
 import failRegisterIcon from "../images/failRegister.png";
 import InfoTooltip from "./InfoTooltip.js";
-
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
@@ -44,22 +43,25 @@ function App() {
   const tokenCheck = () => {
     const token = localStorage.getItem("token");
     if (token) {
-      auth.getContent(token).then((res) => {
-        if (res) {
-          setUserData({
-            email: res.data.email,
-          });
-          setLoggedIn(true);
-          navigate("/my-profile", { replace: true });
-        }
-      });
+      auth
+        .getContent(token)
+        .then((res) => {
+          if (res) {
+            setUserData({
+              email: res.data.email,
+            });
+            setLoggedIn(true);
+            navigate("/my-profile", { replace: true });
+          }
+        })
+        .catch(console.error);
     }
   };
 
   // функция выхода из системы
   const signOut = () => {
     localStorage.removeItem("token");
-    setUserData('');
+    setUserData("");
     navigate("/sign-in", { replace: true });
   };
 
