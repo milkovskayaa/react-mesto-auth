@@ -14,5 +14,3 @@
 * Create React App.
 * Декларативный подход.
 
-## Ссылка на GitHub Pages:
-https://milkovskayaa.github.io/react-mesto-auth/
